@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import "./globals.css";
 import { useEffect, useState } from "react";
 import { getNearestActivity } from "./supabase";
 
@@ -10,6 +10,8 @@ export default function page() {
   const [time2, setTime2] = useState("");
   const [title3, setTitle3] = useState("");
   const [time3, setTime3] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
   function countdown1(date) {
     let countDownDate = new Date(date).getTime();
@@ -26,7 +28,7 @@ export default function page() {
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      setTime1(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+      setTime1(days + "h " + hours + "j " + minutes + "m " + seconds + "d ");
 
       if (distance < 0) {
         clearInterval(x);
@@ -50,7 +52,7 @@ export default function page() {
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      setTime2(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+      setTime2(days + "h " + hours + "j " + minutes + "m " + seconds + "d ");
 
       if (distance < 0) {
         clearInterval(x);
@@ -74,7 +76,7 @@ export default function page() {
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      setTime3(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+      setTime3(days + "h " + hours + "j " + minutes + "m " + seconds + "d ");
 
       if (distance < 0) {
         clearInterval(x);
@@ -112,34 +114,35 @@ export default function page() {
         setTime1("Mohon ditunggu yaa...");
       }
     });
+
+    fetch("/auth/check")
+      .then((response) => response.json())
+      .then((data) => {
+        setIsAuth(data.statusAuth);
+        setIsLoadingAuth(false);
+      });
   }, []);
 
   return (
-    <div style={{ maxHeight: "100vh" }}>
+    <div style={{ minHeight: "100vh" }} className="home">
       <nav className="navbar navbar-expand-lg">
         <div className="navbar-brand">
           <h4 className="text-white mx-auto">Acara Terdekat Dimensi Web</h4>
         </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="collapse navbar-collapse d-flex justify-content-end"
-          id="navbarNav"
-        >
+        <div className="d-flex justify-content-end ml-auto" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item ">
-              <a className="btn btn-light" href="/login">
-                Login
-              </a>
+              {isLoadingAuth ? (
+                <></>
+              ) : isAuth ? (
+                <a className="btn btn-light" href="/admin">
+                  Dashboard
+                </a>
+              ) : (
+                <a className="btn btn-light" href="/login">
+                  Login
+                </a>
+              )}
             </li>
           </ul>
         </div>

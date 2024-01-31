@@ -1,6 +1,17 @@
-import { logout } from "@/app/supabase";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function NavbarComponent() {
+  const supabase = createClientComponentClient();
+  const handleLogout = async () => {
+    const { err } = await supabase.auth.signOut();
+
+    if (!err) {
+      window.location.href = "/login";
+      return;
+    }
+
+    console.error(err);
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/admin">
@@ -38,9 +49,14 @@ export default function NavbarComponent() {
             </a>
           </li>
           <li className="nav-item">
+            <a className="nav-link" href="/admin/register">
+              Register Admin
+            </a>
+          </li>
+          <li className="nav-item">
             <button
               type="button"
-              onClick={logout}
+              onClick={handleLogout}
               className="btn btn-light nav-link"
             >
               Logout

@@ -1,3 +1,34 @@
-body {
+.home {
+  background: url("/bg-home.svg");
+  background-color: #007059;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-all {
   background-color: #eeeeee;
+}
+
+.title-id {
+  float: left;
+}
+
+/* For desktop */
+@media (min-width: 768px) {
+  .logo-id {
+    float: left;
+  }
+}
+
+/* For mobile */
+@media (max-width: 767px) {
+  .logo-id {
+    display: flex;
+    justify-content: center;
+  }
+
+  .title-id {
+    text-align: center;
+  }
 }

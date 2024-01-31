@@ -11,7 +11,6 @@ function formatDateTimeRange(startDateTime, endDateTime) {
       year: "numeric",
     });
     const startTime = startDate.toLocaleTimeString([], {
-      timeZone: "Asia/Jakarta",
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,

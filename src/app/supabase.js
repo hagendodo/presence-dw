@@ -75,6 +75,7 @@ async function login(email, password) {
 }
 
 async function checkSession() {
+  "use client";
   return await supabase.auth.getSession();
 }
 
