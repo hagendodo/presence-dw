@@ -4,19 +4,20 @@ function formatDateTimeRange(startDateTime, endDateTime) {
 
   if (startDate.toDateString() === endDate.toDateString()) {
     const formattedDate = startDate.toLocaleDateString("id-ID", {
-      timeZone: "Asia/Jakarta",
+      timeZone: "UTC",
       weekday: "short",
       day: "numeric",
       month: "short",
       year: "numeric",
     });
     const startTime = startDate.toLocaleTimeString([], {
+      timeZone: "UTC",
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
     });
     const endTime = endDate.toLocaleTimeString([], {
-      timeZone: "Asia/Jakarta",
+      timeZone: "UTC",
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
@@ -24,7 +25,7 @@ function formatDateTimeRange(startDateTime, endDateTime) {
     return `${formattedDate} (${startTime} - ${endTime})`;
   } else {
     const options = {
-      timeZone: "Asia/Jakarta",
+      timeZone: "UTC",
       weekday: "short",
       day: "numeric",
       month: "short",
@@ -33,15 +34,15 @@ function formatDateTimeRange(startDateTime, endDateTime) {
       minute: "2-digit",
       hour12: false,
     };
-    const formattedStartDate = startDate.toLocaleDateString("id-ID", options);
-    const formattedEndDate = endDate.toLocaleDateString("id-ID", options);
+    const formattedStartDate = startDate.toDateString("id-ID", options);
+    const formattedEndDate = endDate.toDateString("id-ID", options);
     return `${formattedStartDate} - ${formattedEndDate}`;
   }
 }
 
 function convertDateToIndoFormat(date) {
   const options = {
-    timeZone: "Asia/Jakarta",
+    timeZone: "UTC",
     weekday: "long",
     day: "numeric",
     month: "short",
