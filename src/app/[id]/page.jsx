@@ -43,7 +43,7 @@ export default function Home({ params }) {
   useEffect(() => {
     getActivityById(params.id).then(({ data, error }) => {
       if (error) {
-        console.log(error);
+        window.location.href = "/";
         return;
       }
 
