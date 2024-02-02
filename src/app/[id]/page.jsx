@@ -80,7 +80,12 @@ export default function Home({ params }) {
       return;
     }
 
-    if (nim.slice(0, 6) !== "121705") {
+    if (nim.slice(0, 2) !== "12") {
+      setLoading(true);
+      return;
+    }
+
+    if (nim.slice(3, 6) !== "705") {
       setLoading(true);
       return;
     }
