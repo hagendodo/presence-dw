@@ -7,9 +7,9 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-async function submitPresence(email, nim, saranMasukan, activityId) {
+async function submitPresence(name, nim, saranMasukan, activityId) {
   const { error } = await supabase.from("presences").insert({
-    email: email,
+    name: name,
     nim: nim,
     saran_masukan: saranMasukan,
     activity_id: activityId,
