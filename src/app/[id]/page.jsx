@@ -48,10 +48,10 @@ export default function Home({ params }) {
       }
 
       setData(data[0]);
-      const options = { timeZone: "Asia/Jakarta" };
+      const options = { timeZone: "UTC" };
       if (
-        new Date(data[0].start_date).toLocaleString("en-US") >=
-        new Date().toLocaleString("en-US")
+        new Date(data[0].start_date).toLocaleString("en-US", options) <=
+        new Date().toLocaleString("en-US", options)
       ) {
         setInitLoading(false);
         return;
