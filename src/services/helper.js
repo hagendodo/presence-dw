@@ -42,7 +42,7 @@ function formatDateTimeRange(startDateTime, endDateTime) {
 
 function convertDateToIndoFormat(date) {
   const options = {
-    timeZone: "UTC",
+    timeZone: "Asia/Jakarta",
     weekday: "long",
     day: "numeric",
     month: "short",
